@@ -20,7 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { Link as RouterLink } from "react-router-dom";
 import React from "react";
-import api from "../services/api";
+import api, { STORAGE_BASE_URL } from "../services/api";
 import type { Post } from "../types/index";
 
 const Transition = React.forwardRef(function Transition(
@@ -74,18 +74,19 @@ const Feed = () => {
       sx={{ mt: 4, position: "relative", minHeight: "80vh", pb: 8 }}
     >
       <Grid
-        container
         spacing={3}
-        justifyContent="center"
-        direction="column"
-        alignItems="center"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         {posts.map((post) => (
           <Grid
-            item
-            xs={12}
+            size={12}
             key={post.id}
-            sx={{ width: "100%", maxWidth: "700px" }}
+            sx={{ width: "100%", maxWidth: "700px", mb: 3 }}
           >
             <Card
               sx={{
@@ -108,7 +109,7 @@ const Feed = () => {
                 >
                   <CardMedia
                     component="img"
-                    image={`http://localhost:8000/storage/${post.image_path}`}
+                    image={`${STORAGE_BASE_URL}/${post.image_path}`}
                     alt={post.title}
                     sx={{
                       height: "100%",
@@ -159,7 +160,7 @@ const Feed = () => {
         fullScreen
         open={!!selectedPost}
         onClose={handleCloseModal}
-        TransitionComponent={Transition}
+        slots={{ transition: Transition }}
       >
         <AppBar sx={{ position: "relative" }}>
           <Toolbar>
@@ -187,7 +188,7 @@ const Feed = () => {
           {selectedPost?.image_path && (
             <Box sx={{ width: "100%", maxWidth: "1000px", textAlign: "center", mb: 4 }}>
               <img
-                src={`http://localhost:8000/storage/${selectedPost.image_path}`}
+                src={`${STORAGE_BASE_URL}/${selectedPost.image_path}`}
                 alt={selectedPost.title}
                 style={{
                   width: "100%",
@@ -209,8 +210,8 @@ const Feed = () => {
             </Typography>
             <Typography
               variant="body1"
-              paragraph
-              sx={{ whiteSpace: "pre-wrap", mt: 2 }}
+              component="p"
+              sx={{ whiteSpace: "pre-wrap", mt: 2, mb: 2 }}
             >
               {selectedPost?.content}
             </Typography>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api', // Ajustar según el puerto de Laravel
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -14,5 +14,7 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+export const STORAGE_BASE_URL = import.meta.env.VITE_API_URL.replace('/api', '/storage');
 
 export default api;

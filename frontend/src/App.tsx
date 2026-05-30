@@ -19,7 +19,7 @@ const App = () => {
               Blog Laravel+React
             </Typography>
             <Button color="inherit" component={RouterLink} to="/feed">
-              Feed
+              Home
             </Button>
             <Button color="inherit" component={RouterLink} to="/my-posts">
               Mis Posts

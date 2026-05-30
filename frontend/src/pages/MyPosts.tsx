@@ -13,7 +13,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { Link as RouterLink } from "react-router-dom";
-import api from "../services/api";
+import api, { STORAGE_BASE_URL } from "../services/api";
 import type { Post } from "../types/index";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
@@ -77,16 +77,17 @@ const MyPosts = () => {
         </Typography>
       ) : (
         <Grid
-          container
           spacing={3}
-          justifyContent="center"
-          direction="column"
-          alignItems="center"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           {posts.map((post) => (
             <Grid
-              item
-              xs={12}
+              size={12}
               key={post.id}
               sx={{ width: "100%", maxWidth: "700px" }}
             >
@@ -95,7 +96,7 @@ const MyPosts = () => {
                   <CardMedia
                     component="img"
                     sx={{ width: 140, height: 140, objectFit: "cover" }}
-                    image={`http://localhost:8000/storage/${post.image_path}`}
+                    image={`${STORAGE_BASE_URL}/${post.image_path}`}
                     alt={post.title}
                   />
                 )}

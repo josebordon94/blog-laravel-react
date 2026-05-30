@@ -32,7 +32,7 @@ const CreatePost = () => {
       setContent((prev) => (prev ? prev + '\n\n' : '') + response.data.content);
       setAiPrompt('');
     } catch (err: any) {
-      setError('Error generating AI content. Please try again.');
+      setError('Error al generar contenido con IA. Intenta de nuevo.');
       console.error(err);
     } finally {
       setAiLoading(false);
@@ -59,7 +59,7 @@ const CreatePost = () => {
       });
       navigate('/feed');
     } catch (err: any) {
-      setError('Error creating post. Please check the fields and try again.');
+      setError('Error al crear el post. Verifica los campos e intenta de nuevo.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -71,12 +71,12 @@ const CreatePost = () => {
       <Box sx={{ mt: 4, mb: 4 }}>
         <Paper elevation={3} sx={{ p: 4 }}>
           <Typography variant="h4" gutterBottom align="center">
-            Create New Post
+            Crear Nuevo Post
           </Typography>
           <form onSubmit={handleSubmit}>
             <TextField
               fullWidth
-              label="Title"
+              label="Título"
               margin="normal"
               required
               value={title}
@@ -84,7 +84,7 @@ const CreatePost = () => {
             />
             <TextField
               fullWidth
-              label="Content"
+              label="Contenido"
               margin="normal"
               required
               multiline
@@ -96,7 +96,7 @@ const CreatePost = () => {
             <Box sx={{ mt: 1, mb: 2, display: 'flex', gap: 1, alignItems: 'flex-start' }}>
               <TextField
                 fullWidth
-                label="Describe the topic to generate AI content"
+                label="Describe el tema para generar contenido con IA"
                 size="small"
                 value={aiPrompt}
                 onChange={(e) => setAiPrompt(e.target.value)}
@@ -115,7 +115,7 @@ const CreatePost = () => {
                 startIcon={aiLoading ? <CircularProgress size={16} /> : <AutoAwesomeIcon />}
                 sx={{ whiteSpace: 'nowrap', minWidth: 'auto', px: 2, height: '40px', mt: '2px' }}
               >
-                {aiLoading ? 'Generating...' : 'Generate with AI'}
+                {aiLoading ? 'Generando...' : 'Generar con IA'}
               </Button>
             </Box>
             
@@ -129,7 +129,7 @@ const CreatePost = () => {
               />
               <label htmlFor="raised-button-file">
                 <Button variant="outlined" component="span" startIcon={<PhotoCamera />}>
-                  Upload Image
+                  Subir Imagen
                 </Button>
               </label>
               
@@ -137,7 +137,7 @@ const CreatePost = () => {
                 <Box sx={{ mt: 2, width: '100%', textAlign: 'center' }}>
                   <img 
                     src={preview} 
-                    alt="Preview" 
+                    alt="Vista previa" 
                     style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '8px' }} 
                   />
                 </Box>
@@ -158,7 +158,7 @@ const CreatePost = () => {
               disabled={loading}
               sx={{ mt: 2 }}
             >
-              {loading ? 'Publishing...' : 'Publish Post'}
+              {loading ? 'Publicando...' : 'Publicar Post'}
             </Button>
           </form>
         </Paper>
